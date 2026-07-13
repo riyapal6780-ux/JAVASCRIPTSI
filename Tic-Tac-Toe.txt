@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .board { display: grid; grid-template-columns: repeat(3, 80px); gap: 4px; }
+        .cell { width: 80px; height: 80px; font-size: 30px; font-weight: bold; text-align: center; background: #eee; border: none; cursor: pointer; }
+        /* Player colors */
+        .colorX { color: #007bff; }
+        .colorO { color: #dc3545; }
+    </style>
+</head>
+<body>
+
+    <h2 id="status">X's Turn</h2>
+    <div class="board">
+        <button class="cell" onclick="play(this)"></button>
+        <button class="cell" onclick="play(this)"></button>
+        <button class="cell" onclick="play(this)"></button>
+        <button class="cell" onclick="play(this)"></button>
+        <button class="cell" onclick="play(this)"></button>
+        <button class="cell" onclick="play(this)"></button>
+        <button class="cell" onclick="play(this)"></button>
+        <button class="cell" onclick="play(this)"></button>
+        <button class="cell" onclick="play(this)"></button>
+    </div>
+    <br><button onclick="location.reload()">Reset</button>
+
+<script>
+    let turn = "X"; // Change this to "O" if you want O to start the game first
+    let cells = document.querySelectorAll('.cell');
+
+    function play(btn) {
+        if (btn.innerText !== "") return; // Stop if cell is taken
+        
+        // Add text and color class based on current turn
+        btn.innerText = turn;
+        btn.classList.add("color" + turn);
+        
+        checkWin();
+    }
+
+    function checkWin() {
+        let wins = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]];
+
+        for (let combo of wins) {
+            let [a, b, c] = combo;
+            if (cells[a].innerText && cells[a].innerText === cells[b].innerText && cells[a].innerText === cells[c].innerText) {
+                document.getElementById("status").innerText = turn + " Wins! 🎉";
+                cells.forEach(c => c.removeAttribute('onclick')); // Lock board
+                return;
+            }
+        }
+
+        // --- TURN SWITCH LOGIC ---
+        // If it was X's turn, change to O. If it was O's turn, change to X.
+        if (turn === "X") {
+            turn = "O";
+        } else {
+            turn = "X";
+        }
+        
+        document.getElementById("status").innerText = turn + "'s Turn";
+    }
+</script>
+
+</body>
+</html>
