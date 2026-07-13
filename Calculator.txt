@@ -1,0 +1,67 @@
+
+<html>
+<head>
+    <title>My Calculator</title>
+    <style>
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+        </style>
+</head>
+<body>
+    <h2 align="center">Calculator</h2>
+    <table border="1">
+    <tr>
+        <td colspan="4">
+            <input type="text" size="28" readonly>
+        </td>
+    </tr>
+    
+    <tr>
+        <td><button onclick="number1(1)">1</button></td>
+        <td><button onclick="number2(2)">2</button></td>
+        <td><button onclick="number3(3)">3</button></td>
+        <td><button onclick="number4(4)">4</button></td>
+    </tr>
+
+    <tr>
+        <td><button onclick="number5(5)">5</button></td>
+        <td><button onclick="number6(6)">6</button></td>
+        <td><button onclick="number7(7)">7</button></td>
+        <td><button onclick="number8(8)">8</button></td>
+    </tr>
+
+    <tr>
+        <td><button onclick="number9(9)">9</button></td>
+        <td><button onclick="number0(0)">0</button></td>
+        <td><button onclick="clearDisplay()">C</button></td>
+        <td><button onclick="calculate()">=</button></td>
+    </tr>
+
+    <tr>
+        <td><button onclick="addOperator('+')">+</button></td>
+        <td><button onclick="addOperator('-')">-</button></td>
+        <td><button onclick="addOperator('*')">*</button></td>
+        <td><button onclick="addOperator('/')">/</button></td>
+    </tr>
+
+    <tr>
+        <td colspan="4" align="center">
+            <button onclick="clr()">Clear</button>
+        </td>
+    </tr>
+</table>
+
+</body>
+<script>
+    function number(n) {
+    alert("numberpressed"+n);
+    }
+</script>
+</html>
