@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basic Student Result Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #resultOutput {
+            margin-top: 20px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Result Calculator</h2>
+    
+    <!-- Input fields for 4 basic subjects -->
+    <div class="input-group">
+        <label for="math">Maths Marks (out of 100):</label>
+        <input type="number" id="math" min="0" max="100" placeholder="Enter Maths marks">
+    </div>
+    
+    <div class="input-group">
+        <label for="science">Science Marks (out of 100):</label>
+        <input type="number" id="science" min="0" max="100" placeholder="Enter Science marks">
+    </div>
+    
+    <div class="input-group">
+        <label for="english">English Marks (out of 100):</label>
+        <input type="number" id="english" min="0" max="100" placeholder="Enter English marks">
+    </div>
+    
+    <div class="input-group">
+        <label for="history">History Marks (out of 100):</label>
+        <input type="number" id="history" min="0" max="100" placeholder="Enter History marks">
+    </div>
+
+    <button onclick="calculateResult()">Calculate Result</button>
+
+    <!-- Target area where JavaScript will display the final score data -->
+    <div id="resultOutput"></div>
+</div>
+
+<script>
+function calculateResult() {
+    // 1. Fetch values from input boxes and convert strings to numbers
+    let mathMarks = parseFloat(document.getElementById('math').value);
+    let scienceMarks = parseFloat(document.getElementById('science').value);
+    let englishMarks = parseFloat(document.getElementById('english').value);
+    let historyMarks = parseFloat(document.getElementById('history').value);
+
+    // 2. Validate inputs to verify fields are not left blank
+    if (isNaN(mathMarks) || isNaN(scienceMarks) || isNaN(englishMarks) || isNaN(historyMarks)) {
+        document.getElementById('resultOutput').innerHTML = "<span style='color: red;'>Please enter marks for all fields!</span>";
+        return;
+    }
+
+    // 3. Compute basic math statistics 
+    let totalMarks = mathMarks + scienceMarks + englishMarks + historyMarks;
+    let percentage = (totalMarks / 400) * 100;
+    
+    // 4. Use conditional statements to determine pass/fail status and final grade
+    let passOrFail = "";
+    if (mathMarks >= 40 && scienceMarks >= 40 && englishMarks >= 40 && historyMarks >= 40) {
+        passOrFail = "<span style='color: green; font-weight: bold;'>Passed</span>";
+    } else {
+        passOrFail = "<span style='color: red; font-weight: bold;'>Failed (Must score 40+ in all subjects)</span>";
+    }
+
+    let grade = "";
+    if (percentage >= 90) {
+        grade = "A+";
+    } else if (percentage >= 80) {
+        grade = "A";
+    } else if (percentage >= 70) {
+        grade = "B";
+    } else if (percentage >= 60) {
+        grade = "C";
+    } else if (percentage >= 40) {
+        grade = "D";
+    } else {
+        grade = "F";
+    }
+
+    // 5. Update HTML layout dynamically with calculations
+    document.getElementById('resultOutput').innerHTML = `
+        <hr>
+        <strong>Total Marks:</strong> ${totalMarks} / 400 <br>
+        <strong>Percentage:</strong> ${percentage.toFixed(2)}% <br>
+        <strong>Grade:</strong> ${grade} <br>
+        <strong>Status:</strong> ${passOrFail}
+    `;
+}
+</script>
+
+</body>
+</html>
