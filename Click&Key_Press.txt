@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyUp Event Example</title>
+
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+    <h2>KeyUp Event Demo</h2>
+
+    <input type="text" id="txt" placeholder="Type something...">
+
+    <br><br>
+
+    <h3>Output:</h3>
+    <p id="v"></p>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#txt").keyup(function () {
+
+                // Alert on every key press
+                alert("Key Pressed");
+
+                // Get input value
+                let n = $("#txt").val();
+
+                // Display value
+                $("#v").html(n);
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>
