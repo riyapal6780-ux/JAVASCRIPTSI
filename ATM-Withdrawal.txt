@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATM Withdrawal System</title>
+
+<style>
+    body{
+        font-family:Arial, sans-serif;
+        background:#f2f2f2;
+        text-align:center;
+        margin-top:50px;
+    }
+
+    .container{
+        width:350px;
+        margin:auto;
+        background:white;
+        padding:20px;
+        border-radius:10px;
+        box-shadow:0 0 10px gray;
+    }
+
+    h2{
+        color:#333;
+    }
+
+    input{
+        width:90%;
+        padding:10px;
+        margin:10px 0;
+        font-size:16px;
+    }
+
+    button{
+        padding:10px 20px;
+        font-size:16px;
+        background:#007BFF;
+        color:white;
+        border:none;
+        border-radius:5px;
+        cursor:pointer;
+    }
+
+    button:hover{
+        background:#0056b3;
+    }
+
+    #result{
+        margin-top:20px;
+        font-size:18px;
+        font-weight:bold;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>ATM Withdrawal System</h2>
+
+<h3>Current Balance: ₹10000</h3>
+
+<input type="number" id="amount" placeholder="Enter Withdrawal Amount">
+
+<br>
+
+<button onclick="withdraw()">Withdraw</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+let balance = 10000;
+
+function withdraw(){
+
+    let amount = Number(document.getElementById("amount").value);
+
+    if(amount <= 0){
+        document.getElementById("result").innerHTML =
+        "❌ Enter a valid amount.";
+    }
+    else if(amount % 100 != 0){
+        document.getElementById("result").innerHTML =
+        "❌ Amount should be a multiple of ₹100.";
+    }
+    else if(amount > balance){
+        document.getElementById("result").innerHTML =
+        "❌ Insufficient Balance.";
+    }
+    else{
+
+        balance -= amount;
+
+        document.getElementById("result").innerHTML =
+        "✅ Withdrawal Successful!<br><br>" +
+        "Withdrawn: ₹" + amount +
+        "<br>Remaining Balance: ₹" + balance;
+
+        document.querySelector("h3").innerHTML =
+        "Current Balance: ₹" + balance;
+    }
+
+    document.getElementById("amount").value="";
+}
+
+</script>
+
+</body>
+</html>
